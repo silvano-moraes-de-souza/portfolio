@@ -35,6 +35,6 @@ Minha abordagem foca na **eficiência pura**: desde a prototipagem no Figma até
 
 ## 📫 Vamos conversar?
 
-- **LinkedIn:** [linkedin.com/in/seu-perfil](https://www.linkedin.com/in/seu-perfil)
+- **LinkedIn:** [linkedin.com/in/seu-perfil](https://www.linkedin.com/in/silvano-moraes-de-souza/)
 - **Site:** [https://seu-link.vercel.app](https://seu-link.vercel.app)
 - **Localização:** Sorocaba/SP (Disponível para Remoto)
