@@ -3,7 +3,7 @@ backend:
   name: github
   repo: boysilver7777/portifolio # Seu usuário/repositório exato
   branch: main
-  base_url: https://decap-cms-oss-gitea.vercel.app
+  auth_type: pkce
   site_domain: silvanomsouza.vercel.app
 
 # Permite editar localmente no VS Code (npx decap-cms-proxy-server)
