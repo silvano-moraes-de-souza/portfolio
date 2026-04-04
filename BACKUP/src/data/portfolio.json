@@ -1,0 +1,88 @@
+{
+  "projetos": [
+    {
+      "id": 1,
+      "titulo": "Dashboard C-Level",
+      "descricao": "Visão gerencial completa 360º conectando Power BI com SQL Server, focado na saúde financeira corporativa.",
+      "tecnologias": ["Power BI", "DAX", "SQL"],
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "titulo": "Agente Autônomo SLA",
+      "descricao": "Automação no n8n interligado com o Service Desk para monitoramento e reatribuição preditiva de tickets de suporte.",
+      "tecnologias": ["n8n", "Python", "API REST"],
+      "link": "#"
+    },
+    {
+      "id": 3,
+      "titulo": "Tracker de Logística",
+      "descricao": "Macro massiva em VBA construída para reconciliação automática do inventário contra notas fiscais emitidas.",
+      "tecnologias": ["Excel Avançado", "VBA", "SAP"],
+      "link": "#"
+    },
+    {
+      "id": 4,
+      "titulo": "Painel SaaS Analytics",
+      "descricao": "Interface web React desenvolvida com Tailwind e Stitch para acompanhamento do CAC e Churn em tempo real.",
+      "tecnologias": ["React", "Tailwind", "JavaScript"],
+      "link": "#"
+    },
+    {
+      "id": 5,
+      "titulo": "Extrator BigQuery",
+      "descricao": "Pipe de dados diário escrito em Python (Pandas) extraindo do SQL legado para BigQuery via GCP.",
+      "tecnologias": ["Python", "Pandas", "GCP"],
+      "link": "#"
+    },
+    {
+      "id": 6,
+      "titulo": "Design System Corporativo",
+      "descricao": "Prototipagem Figma de design system completo para uniformizar a estética dos sistemas internos da empresa.",
+      "tecnologias": ["Figma", "UI/UX", "Componentização"],
+      "link": "#"
+    },
+    {
+      "id": 7,
+      "titulo": "Estoque Automatizado",
+      "descricao": "Script Python em servidor local para dar baixa automática em sistemas WMS utilizando leitura de planilhas.",
+      "tecnologias": ["Python", "Automação", "WMS"],
+      "link": "#"
+    },
+    {
+      "id": 8,
+      "titulo": "Portal de Fornecedores",
+      "descricao": "Aplicação front-end simples que integra autenticação e lista catálogos consumindo via Supabase.",
+      "tecnologias": ["React", "Supabase", "Auth"],
+      "link": "#"
+    },
+    {
+      "id": 9,
+      "titulo": "Sistema de CRM Avançado",
+      "descricao": "Plataforma completa de gestão de relacionamento com clientes com automação de marketing e analytics.",
+      "tecnologias": ["React", "Node.js", "MongoDB"],
+      "link": "#"
+    },
+    {
+      "id": 10,
+      "titulo": "App de Delivery Real-time",
+      "descricao": "Aplicativo mobile com rastreamento em tempo real, notificações push e sistema de pagamento integrado.",
+      "tecnologias": ["React Native", "Firebase", "Stripe"],
+      "link": "#"
+    },
+    {
+      "id": 11,
+      "titulo": "Plataforma E-learning",
+      "descricao": "Sistema de cursos online com vídeos sob demanda, quizzes interativos e certificados automáticos.",
+      "tecnologias": ["Vue.js", "Laravel", "AWS S3"],
+      "link": "#"
+    },
+    {
+      "id": 12,
+      "titulo": "Dashboard Financeiro",
+      "descricao": "Dashboard interativo para análise de investimentos com gráficos em tempo real e previsões.",
+      "tecnologias": ["D3.js", "Python", "FastAPI"],
+      "link": "#"
+    }
+  ]
+}
