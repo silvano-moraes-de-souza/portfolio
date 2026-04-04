@@ -1,16 +1,40 @@
-# React + Vite
+# 🚀 Silvano Moraes — Solution Developer & Data Specialist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindo ao meu ecossistema de soluções. Este repositório hospeda meu portfólio profissional, focado em **Automação de Processos (n8n/Python)**, **Business Intelligence** e **Interfaces Reativas**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Stack Tecnológica
 
-## React Compiler
+| Categoria | Tecnologias |
+| :--- | :--- |
+| **Automação & Backend** | Python (Pandas/NumPy), n8n, Node.js, SQL (PostgreSQL/BigQuery) |
+| **Visualização de Dados** | Power BI, Looker Studio, Dashboards Estratégicos |
+| **Frontend & Design** | React, Tailwind CSS, Vite, Figma (UI/UX) |
+| **Infraestrutura** | Docker, Oracle Cloud, Vercel, Supabase |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 💡 Visão Sistêmica
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Minha abordagem foca na **eficiência pura**: desde a prototipagem no Figma até a entrega de pipelines de dados que automatizam semanas de trabalho manual.
+
+### Projetos em Destaque no Código:
+* **Extrator BigQuery:** Pipeline de dados diário escrito em Python para extração de SQL legado.
+* **Estoque Automatizado:** Script Python para baixa automática em sistemas WMS via leitura de planilhas.
+* **Portal de Fornecedores:** App React integrado com Supabase para gestão de catálogos.
+
+---
+
+## 📈 Métricas de Impacto
+* **8+ Anos** de experiência corporativa.
+* **30+ Projetos** entregues com foco em ROI e automação.
+* **Visão 360°** integrando tecnologia ao negócio.
+
+---
+
+## 📫 Vamos conversar?
+
+- **LinkedIn:** [linkedin.com/in/seu-perfil](https://www.linkedin.com/in/seu-perfil)
+- **Site:** [https://seu-link.vercel.app](https://seu-link.vercel.app)
+- **Localização:** Sorocaba/SP (Disponível para Remoto)
