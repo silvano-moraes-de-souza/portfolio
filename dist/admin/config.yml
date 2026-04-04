@@ -1,0 +1,36 @@
+# Configuração para Vercel + GitHub (Sem Netlify)
+backend:
+  name: github
+  repo: boysilver7777/portifolio # Seu usuário/repositório exato
+  branch: main
+  base_url: https://api.github.com
+  site_domain: silvanomsouza.vercel.app
+
+# Permite editar localmente no VS Code (npx decap-cms-proxy-server)
+local_backend: true
+
+# Onde as imagens enviadas pelo Admin serão salvas
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "configuracoes"
+    label: "Meus Projetos"
+    delete: false # Evita deletar o arquivo por erro
+    editor:
+      preview: false # Desativa o preview para carregar mais rápido
+    files:
+      - label: "Lista de Projetos"
+        name: "projetos"
+        file: "src/data/portfolio.json"
+        fields:
+          - label: "Projetos"
+            name: "projetos"
+            widget: "list"
+            fields:
+              - {label: "ID (Identificador único numérico)", name: "id", widget: "number"}
+              - {label: "Título", name: "titulo", widget: "string"}
+              - {label: "Descrição", name: "descricao", widget: "text"}
+              - {label: "Tecnologias Usadas", name: "tecnologias", widget: "list"}
+              - {label: "Link do Projeto", name: "link", widget: "string", required: false}
+              - {label: "Imagem de Capa", name: "image", widget: "image", required: false}
