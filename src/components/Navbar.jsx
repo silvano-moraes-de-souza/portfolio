@@ -1,12 +1,13 @@
 // Propriedade Intelectual: Silvano Moraes de Souza
 import { useState, useEffect } from 'react';
-import { Sun, Moon, LineChart } from 'lucide-react';
+import { Sun, Moon, LineChart, Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const LIGHT_GRADIENT = '#0e7490';
 
 export default function Navbar() {
   const [isDark, setIsDark] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (isDark) {
@@ -15,6 +16,18 @@ export default function Navbar() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
+
+  const navLinks = [
+    { to: '/', label: 'PERFIL' },
+    { to: '/trajetoria', label: 'TRAJETORIA' },
+    { to: '/projetos', label: 'PROJETOS' },
+  ];
+
+  const linkClass = ({ isActive }) => `block font-headline font-bold tracking-tight text-xl py-3 px-6 rounded-lg transition-all duration-300 ${
+    isActive 
+      ? (isDark ? 'text-cyan-400 bg-cyan-400/10' : 'text-white bg-white/20') 
+      : (isDark ? 'text-white/70 hover:text-cyan-400 hover:bg-white/5' : 'text-white/80 hover:text-white hover:bg-white/10')
+  }`;
 
   return (
     <nav
@@ -25,44 +38,54 @@ export default function Navbar() {
       }
     >
       
-      {/* Esquerda: Nome */}
-      <NavLink to="/" className={`text-xl md:text-3xl font-bold tracking-tighter font-headline uppercase truncate max-w-[250px] md:max-w-none transition-colors duration-300 ${isDark ? 'text-cyan-400' : 'text-white'}`}>
-        <span className="hidden md:inline">Silvano </span>Moraes<span className="hidden md:inline"> de Souza</span>
-      </NavLink>
-
-      {/* Centro: Links */}
-      <div className="hidden md:flex items-center gap-10">
-        <NavLink 
-          to="/" 
-          className={({ isActive }) => `font-headline font-bold tracking-tight text-xl transition-all duration-300 ${
-            isActive 
-              ? (isDark ? 'text-cyan-300 border-b-2 border-cyan-400 pb-1' : 'text-white border-b-2 border-white pb-1') 
-              : (isDark ? 'text-white/70 hover:text-cyan-400' : 'text-white hover:text-white/80')
-          }`}
+      {/* Esquerda: Nome + Menu Hamburger */}
+      <div className="flex items-center gap-4">
+        <button 
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-300"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Abrir menu"
         >
-          PERFIL
-        </NavLink>
-        <NavLink 
-          to="/trajetoria" 
-          className={({ isActive }) => `font-headline font-bold tracking-tight text-xl transition-all duration-300 ${
-            isActive 
-              ? (isDark ? 'text-cyan-300 border-b-2 border-cyan-400 pb-1' : 'text-white border-b-2 border-white pb-1') 
-              : (isDark ? 'text-white/70 hover:text-cyan-400' : 'text-white hover:text-white/80')
-          }`}
-        >
-          TRAJETORIA
-        </NavLink>
-        <NavLink 
-          to="/projetos" 
-          className={({ isActive }) => `font-headline font-bold tracking-tight text-xl transition-all duration-300 ${
-            isActive 
-              ? (isDark ? 'text-cyan-300 border-b-2 border-cyan-400 pb-1' : 'text-white border-b-2 border-white pb-1') 
-              : (isDark ? 'text-white/70 hover:text-white' : 'text-white hover:text-white/80')
-          }`}
-        >
-          PROJETOS
+          {menuOpen 
+            ? <X size={28} className={isDark ? 'text-cyan-400' : 'text-white'} />
+            : <Menu size={28} className={isDark ? 'text-cyan-400' : 'text-white'} />
+          }
+        </button>
+        <NavLink to="/" className={`text-xl md:text-3xl font-bold tracking-tighter font-headline uppercase truncate max-w-[200px] md:max-w-none transition-colors duration-300 ${isDark ? 'text-cyan-400' : 'text-white'}`}>
+          <span className="hidden md:inline">Silvano </span>Silvano<span className="hidden md:inline"> Moraes de Souza</span>
         </NavLink>
       </div>
+
+      {/* Centro: Links (Desktop) */}
+      <div className="hidden md:flex items-center gap-10">
+        {navLinks.map((link) => (
+          <NavLink key={link.to} to={link.to} className={linkClass}>
+            {link.label}
+          </NavLink>
+        ))}
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 top-20 z-40 md:hidden" onClick={() => setMenuOpen(false)}>
+          <div 
+            className={`absolute inset-0 ${isDark ? 'bg-[rgba(10,10,12,0.95)]' : 'bg-[rgba(14,116,144,0.95)]'} backdrop-blur-xl`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col gap-2 p-6 pt-8">
+              {navLinks.map((link) => (
+                <NavLink 
+                  key={link.to} 
+                  to={link.to} 
+                  className={linkClass}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Direita: Switch + Logo */}
         <div className="flex items-center gap-10">
