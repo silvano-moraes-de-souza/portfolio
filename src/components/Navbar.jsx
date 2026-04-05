@@ -51,7 +51,7 @@ export default function Navbar() {
           }
         </button>
         <NavLink to="/" className={`text-xl md:text-3xl font-bold tracking-tighter font-headline uppercase truncate max-w-[200px] md:max-w-none transition-colors duration-300 ${isDark ? 'text-cyan-400' : 'text-white'}`}>
-          <span className="hidden md:inline">Silvano </span>Silvano<span className="hidden md:inline"> Moraes de Souza</span>
+          Silvano<span className="hidden md:inline"> Moraes de Souza</span>
         </NavLink>
       </div>
 
