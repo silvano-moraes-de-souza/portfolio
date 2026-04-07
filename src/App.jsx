@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import SobreMim from './components/SobreMim';
 import Trajetoria from './components/Trajetoria';
 import Projetos from './components/Projetos';
+import ProjectDetail from './components/ProjectDetail';
 import Footer from './components/Footer';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<SobreMim />} />
           <Route path="/trajetoria" element={<Trajetoria />} />
           <Route path="/projetos" element={<Projetos />} />
+          <Route path="/projeto/:id" element={<ProjectDetail />} />
         </Routes>
       </main>
       <Footer />

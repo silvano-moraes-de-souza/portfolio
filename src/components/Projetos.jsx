@@ -1,5 +1,6 @@
 import { Terminal, Layers, Zap, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import projetos from '../data/portfolio.json';
 
 function renderPythonCode() {
@@ -343,9 +344,9 @@ export default function Projetos() {
                       </div>
                       
                       {/* Botão Ver Projeto */}
-                      <a href={projeto.link} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center px-6 py-4 bg-primary dark:bg-primary text-slate-900 dark:text-slate-900 font-bold font-mono tracking-widest uppercase rounded-xl hover:bg-primary-container dark:hover:bg-primary-dim gap-2 transition-all shadow-lg hover:shadow-primary/30 group-hover:scale-[1.02]">
+                      <Link to={`/projeto/${projeto.id}`} className="inline-flex w-full items-center justify-center px-6 py-4 bg-primary dark:bg-primary text-slate-900 dark:text-slate-900 font-bold font-mono tracking-widest uppercase rounded-xl hover:bg-primary-container dark:hover:bg-primary-dim gap-2 transition-all shadow-lg hover:shadow-primary/30 group-hover:scale-[1.02]">
                         Ver Projeto <span className="text-xl">&rarr;</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -13,16 +13,16 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-cyan-400/5 dark:bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="flex flex-wrap justify-center gap-6 relative z-10">
-        <a href="#" title="LinkedIn" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-cyan-500/30 hover:border-cyan-400 dark:hover:border-primary transition-all duration-300 hover:-translate-y-2">
+        <a href="https://www.linkedin.com/in/silvano-moraes-de-souza/" target="_blank" rel="noopener noreferrer" title="LinkedIn" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-cyan-500/30 hover:border-cyan-400 dark:hover:border-primary transition-all duration-300 hover:-translate-y-2">
           <LinkedinIcon size={28} className="text-white dark:text-slate-400 group-hover:text-cyan-300 dark:group-hover:text-primary transition-colors" />
         </a>
-        <a href="#" title="WhatsApp" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-emerald-500/30 hover:border-emerald-400 dark:hover:border-tertiary transition-all duration-300 hover:-translate-y-2">
+        <a href="https://wa.me/5515999999999" target="_blank" rel="noopener noreferrer" title="WhatsApp" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-emerald-500/30 hover:border-emerald-400 dark:hover:border-tertiary transition-all duration-300 hover:-translate-y-2">
            <WhatsAppIcon size={28} className="text-white dark:text-slate-400 group-hover:text-emerald-300 dark:group-hover:text-tertiary transition-colors" />
         </a>
-        <a href="#" title="Instagram" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-pink-500/30 hover:border-pink-400 dark:hover:border-secondary transition-all duration-300 hover:-translate-y-2">
+        <a href="https://www.instagram.com/silvanomsouza/" target="_blank" rel="noopener noreferrer" title="Instagram" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-pink-500/30 hover:border-pink-400 dark:hover:border-secondary transition-all duration-300 hover:-translate-y-2">
           <InstagramIcon size={28} className="text-white dark:text-slate-400 group-hover:text-pink-300 dark:group-hover:text-secondary transition-colors" />
         </a>
-        <a href="#" title="GitHub" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-white/20 hover:border-white dark:hover:border-white transition-all duration-300 hover:-translate-y-2">
+        <a href="https://github.com/silvanomoraes" target="_blank" rel="noopener noreferrer" title="GitHub" className="group flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 dark:bg-surface-container-low border border-white/20 dark:border-white/5 shadow-lg hover:shadow-white/20 hover:border-white dark:hover:border-white transition-all duration-300 hover:-translate-y-2">
           <GithubIcon size={28} className="text-white dark:text-slate-400 group-hover:text-white dark:group-hover:text-white transition-colors" />
         </a>
       </div>
