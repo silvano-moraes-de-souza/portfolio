@@ -82,7 +82,7 @@ export default function SobreMim() {
                 <img
                   alt="Silvano Moraes de Souza, engenheiro de software"
                   className="w-full aspect-[4/5] object-cover rounded-xl grayscale group-hover:grayscale-0 transition-all duration-700"
-                  src="https://i.ibb.co/MkLhTT6L/SILVANO.png"
+                  src="/img/silvano.webp"
                 />
               </div>
               <div className="absolute bottom-6 -right-4 bg-surface-container-highest/90 backdrop-blur-md p-4 rounded-lg border border-outline-variant/20 font-mono text-[10px] text-tertiary-dim tracking-wider uppercase leading-relaxed">

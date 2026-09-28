@@ -114,7 +114,7 @@ export default function Trajetoria() {
                 <img
                   alt="Silvano Moraes de Souza"
                   className="w-full aspect-[2/3] object-cover object-[center_15%] rounded-2xl grayscale hover:grayscale-0 transition-all duration-700"
-                  src="https://i.ibb.co/KZwW97Q/SILVANO-E-THALITA.png"
+                  src="/img/silvano-2.webp"
                 />
               </div>
             </div>
