@@ -1,88 +1,228 @@
 {
   "projetos": [
     {
-      "id": 1,
-      "titulo": "Dashboard C-Level",
-      "descricao": "Visão gerencial completa 360º conectando Power BI com SQL Server, focado na saúde financeira corporativa.",
-      "tecnologias": ["Power BI", "DAX", "SQL"],
-      "link": "#"
+      "slug": "dashboard-financeiro-bi",
+      "titulo": "Dashboard Financeiro BI",
+      "subtitulo": "ETL do ERP para PostgreSQL, análises em SQL dentro do banco e um painel web seguro",
+      "descricao": "O fechamento do mês era feito exportando relatórios do ERP e conciliando duas empresas em planilha. Virou pipeline de ETL, funções SQL no PostgreSQL e um painel que a diretoria abre no navegador.",
+      "tecnologias": ["Python", "ETL", "PostgreSQL", "Supabase", "Flask", "JavaScript"],
+      "metricas": [
+        { "valor": "~60%", "label": "menos tempo no fechamento mensal" },
+        { "valor": "~80%", "label": "dos relatórios recorrentes automatizados" },
+        { "valor": "2", "label": "empresas consolidadas em uma visão" }
+      ],
+      "notaMetricas": "Medido na implantação em produção, comparando o fechamento antes e depois. O repositório é a versão de estudo, sem dados da empresa.",
+      "problema": "Uma indústria de cosméticos e produtos de limpeza opera duas empresas no mesmo ERP (Tiny ERP). Todo mês, vendas e notas eram exportadas das duas, tratadas em planilha e conferidas à mão. Os relatórios divergiam e a diretoria via o consolidado dias depois do fim do mês.",
+      "solucao": "O ETL puxa mês a mês por empresa e confere se o mês já foi carregado antes de buscar de novo, então uma nova execução depois de uma falha continua de onde parou. Os dados passam por um SQLite de staging e são sincronizados com o PostgreSQL no Supabase. O processamento pesado acontece no banco: três funções RPC recebem até uma dúzia de filtros opcionais e devolvem o JSON pronto para o gráfico.",
+      "destaques": [
+        "Extração resiliente: retry com espera crescente em timeout e erro de conexão, pausa de 60 s quando a API devolve 429",
+        "Normalização de datas em vários formatos, CPF/CNPJ para tipo de pessoa, conversão caixa/unidade e categorias unificadas entre as duas empresas",
+        "Segurança no banco: views trocadas para security_invoker, Row Level Security em 6 tabelas e todos os privilégios revogados do papel anon",
+        "API com Content Security Policy, X-Frame-Options e CORS por lista de origens",
+        "Front em JavaScript puro com roteador próprio, login e páginas de Financeiro, Vendas, Mapa por estado e Admin"
+      ],
+      "decisoes": [
+        { "decisao": "SQLite como staging antes do Postgres", "motivo": "A API do ERP é lenta e tem limite de requisições. Com uma cópia local, uma falha na sincronização com a nuvem nunca obriga a extrair tudo de novo." },
+        { "decisao": "Agregar em SQL, não no Python nem no navegador", "motivo": "O painel envia filtros e recebe algumas centenas de números em vez de dezenas de milhares de linhas." },
+        { "decisao": "Row Level Security e revogação do anon", "motivo": "O Supabase expõe as tabelas por uma API pública. Sem RLS, qualquer um com a URL do projeto leria os dados de vendas." }
+      ],
+      "limitacoes": [
+        "A versão de estudo não tem testes automatizados",
+        "Nada no repositório agenda o ETL ou alerta falhas"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/dashboard-financeiro-bi",
+      "demo": null
     },
     {
-      "id": 2,
-      "titulo": "Agente Autônomo SLA",
-      "descricao": "Automação no n8n interligado com o Service Desk para monitoramento e reatribuição preditiva de tickets de suporte.",
-      "tecnologias": ["n8n", "Python", "API REST"],
-      "link": "#"
+      "slug": "logistica-rotas-geolocalizacao",
+      "titulo": "Roteirização + Rastreio de Entregas",
+      "subtitulo": "Do PDF de pedidos à rota otimizada, com app offline para o motorista",
+      "descricao": "Planejar um dia de entregas levava cerca de 3 horas de leitura de PDF, busca de endereço e ordenação manual das paradas. Com o sistema leva cerca de 2 minutos, e o motorista confirma cada volume pelo celular mesmo sem sinal.",
+      "tecnologias": ["Python", "Node.js", "OpenRouteService", "React Native", "SQLite", "JWT"],
+      "metricas": [
+        { "valor": "3h → 2min", "label": "para planejar o dia de entregas" },
+        { "valor": "100", "label": "paradas por otimização (VRP)" },
+        { "valor": "60 s", "label": "ciclo de sincronização do app offline" }
+      ],
+      "notaMetricas": "A comparação 3 h → 2 min foi medida na operação do dia a dia. Endereços e dados do repositório são fictícios.",
+      "problema": "A roteirização era manual: ler os pedidos em PDF, buscar cada endereço no mapa e montar a ordem das paradas, sem considerar janela de entrega, feriado ou custo de combustível. Em campo, a confirmação das entregas dependia de sinal de celular.",
+      "solucao": "Dois módulos independentes. O de roteirização extrai endereços dos PDFs, geocodifica validando o estado, calcula a matriz de distâncias e otimiza a rota com janelas de horário pela API do OpenRouteService, dividindo o trabalho em dias úteis. O de rastreio tem uma API Express com JWT e um app Expo que grava tudo em SQLite local e sincroniza quando há conexão.",
+      "destaques": [
+        "Otimização de rotas (VRP com janelas de horário) pelo OpenRouteService, com fallback local em Haversine + vizinho mais próximo",
+        "Divisão da rota em dias úteis, pulando fins de semana e feriados de SP",
+        "Geocodificação que rejeita resultados fora do estado esperado",
+        "Custo da rota pelo preço do combustível na cidade, com valor de reserva se a consulta falhar",
+        "App do motorista offline-first com fila de sincronização e QR code por volume"
+      ],
+      "decisoes": [
+        { "decisao": "API de otimização com fallback local", "motivo": "Distâncias reais por estrada sem manter um motor de roteamento. Sem chave ou sem cota, a rota ainda sai utilizável." },
+        { "decisao": "Validar a geocodificação pelo estado", "motivo": "Geocodificadores devolvem a rua de mesmo nome em outro estado. Rejeitar esses casos evita rotas que saltam centenas de quilômetros." },
+        { "decisao": "Offline-first com fila", "motivo": "O motorista perde sinal na estrada. Gravar localmente primeiro garante que nenhuma leitura se perde." }
+      ],
+      "limitacoes": [
+        "Sem testes automatizados",
+        "O vizinho mais próximo é heurística: usado só como reserva, pode gerar rotas mais longas"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/logistica-rotas-geolocalizacao",
+      "demo": null
     },
     {
-      "id": 3,
-      "titulo": "Tracker de Logística",
-      "descricao": "Macro massiva em VBA construída para reconciliação automática do inventário contra notas fiscais emitidas.",
-      "tecnologias": ["Excel Avançado", "VBA", "SAP"],
-      "link": "#"
+      "slug": "luminus-whatsapp-ai",
+      "titulo": "Luminus",
+      "subtitulo": "Assistente de IA no WhatsApp: webhook Flask, fila Celery, pool de modelos Gemini e memória em Postgres",
+      "descricao": "Assistente pessoal que vive no WhatsApp. Responde só contatos autorizados, alterna entre modo secretária e modo atendimento por comando, lembra cada conversa e continua funcionando quando um modelo ou uma chave estoura a cota.",
+      "tecnologias": ["Python", "Flask", "Celery", "Redis", "Gemini", "PostgreSQL", "Docker"],
+      "metricas": [
+        { "valor": "11", "label": "modelos Gemini no pool, com 2 chaves" },
+        { "valor": "6", "label": "serviços no Docker Compose" },
+        { "valor": "3", "label": "tentativas por mensagem na fila" }
+      ],
+      "notaMetricas": null,
+      "problema": "Um número pessoal recebe de tudo: contatos, grupos, spam. Um assistente com LLM precisa responder rápido sem travar o gateway do WhatsApp, lembrar o contexto de cada pessoa e não parar quando o plano gratuito de um modelo acaba.",
+      "solucao": "A Evolution API entrega cada mensagem num webhook Flask autenticado, que só enfileira e responde na hora. Um worker Celery processa: o roteador confere a lista de contatos, aplica comandos de modo, carrega o histórico do Postgres e chama o pool de modelos, que tenta o próximo modelo ou a próxima chave quando algo falha.",
+      "destaques": [
+        "Webhook com Bearer secret e entrada sanitizada e truncada",
+        "Fila entre webhook e modelo: o gateway nunca espera o LLM",
+        "Pool de 11 modelos Gemini com duas chaves; /mobile desvia para um modelo local no LM Studio",
+        "Modos /secretary e /sac guardados por conversa",
+        "Segredos, senhas do banco e o número do dono só no .env"
+      ],
+      "decisoes": [
+        { "decisao": "Fila entre webhook e modelo", "motivo": "Chamadas de LLM levam segundos. Responder o webhook na hora evita timeout e entrega duplicada, e o Celery refaz o que falhar." },
+        { "decisao": "Pool de modelos com rotação de chaves", "motivo": "Planos gratuitos batem limite várias vezes ao dia. Percorrer modelos e chaves transforma uma queda em outro modelo respondendo." },
+        { "decisao": "Lista de contatos por padrão", "motivo": "Responder só quem é conhecido reduz custo de modelo e risco." }
+      ],
+      "limitacoes": [
+        "2 dos 7 testes de unidade estão desatualizados (esperam um nó Groq que saiu do roteador)",
+        "Áudio é identificado mas não transcrito"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/luminus-whatsapp-ai",
+      "demo": null
     },
     {
-      "id": 4,
-      "titulo": "Painel SaaS Analytics",
-      "descricao": "Interface web React desenvolvida com Tailwind e Stitch para acompanhamento do CAC e Churn em tempo real.",
-      "tecnologias": ["React", "Tailwind", "JavaScript"],
-      "link": "#"
+      "slug": "n8n-whatsapp-waha",
+      "titulo": "Agente de IA no WhatsApp com n8n",
+      "subtitulo": "WAHA + n8n + LLM com memória no Redis, tudo em Docker Compose",
+      "descricao": "Um número de WhatsApp que responde com LLM, lembra a conversa e sobe com um comando. A versão sem código da mesma ideia do Luminus, com o workflow versionado em JSON.",
+      "tecnologias": ["n8n", "WAHA", "OpenRouter", "Redis", "PostgreSQL", "Docker"],
+      "metricas": [
+        { "valor": "20", "label": "mensagens de memória por conversa" },
+        { "valor": "1 h", "label": "de TTL da memória no Redis" },
+        { "valor": "4", "label": "containers com um docker compose up" }
+      ],
+      "notaMetricas": null,
+      "problema": "Automatizar respostas no WhatsApp com IA sem escrever um backend, mas sem abrir mão de filtro, memória e segredos fora do código.",
+      "solucao": "O WAHA transforma cada mensagem num webhook do n8n. O workflow filtra (só mensagem recebida, sem grupo, sem as do próprio bot), um agente de IA responde usando as últimas 20 mensagens daquele chat guardadas no Redis, e o WAHA marca como lida e envia a resposta.",
+      "destaques": [
+        "Filtro antes do agente: grupos e mensagens do próprio bot nunca chegam ao LLM",
+        "Memória por chat no Redis com janela de 20 mensagens e expiração de 1 hora",
+        "Modelo atrás de uma credencial do n8n: trocar OpenRouter por Groq é religar um nó",
+        "Postgres como banco do n8n e todos os segredos no .env",
+        "Portas presas em 127.0.0.1"
+      ],
+      "decisoes": [
+        { "decisao": "WAHA como gateway", "motivo": "Roda local sem verificação de empresa na Meta, suficiente para assistente pessoal ou protótipo." },
+        { "decisao": "n8n para orquestrar", "motivo": "O fluxo muda com frequência. No n8n é edição visual, e o workflow continua exportado e versionado no repositório." }
+      ],
+      "limitacoes": [
+        "Só texto: áudio e imagem chegam ao webhook mas não são tratados",
+        "Sem passagem para atendimento humano"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/n8n-whatsapp-waha",
+      "demo": null
     },
     {
-      "id": 5,
-      "titulo": "Extrator BigQuery",
-      "descricao": "Pipe de dados diário escrito em Python (Pandas) extraindo do SQL legado para BigQuery via GCP.",
-      "tecnologias": ["Python", "Pandas", "GCP"],
-      "link": "#"
+      "slug": "jarvis-cv-saas",
+      "titulo": "Jarvis CV",
+      "subtitulo": "SaaS de otimização de currículo com IA: nota ATS, busca em 9 portais e exportação DOCX",
+      "descricao": "Lê o currículo e a vaga, diz como um ATS pontuaria o encaixe e por quê, reescreve o que falta, busca vagas em 9 portais brasileiros e exporta em DOCX. API, camada de IA, banco, pagamentos e front feitos de ponta a ponta.",
+      "tecnologias": ["FastAPI", "Celery", "Redis", "Supabase", "Stripe", "React", "TypeScript"],
+      "metricas": [
+        { "valor": "6", "label": "componentes ponderados na nota ATS" },
+        { "valor": "5", "label": "modelos especialistas + cadeia de fallback" },
+        { "valor": "9", "label": "portais de vagas numa busca" }
+      ],
+      "notaMetricas": null,
+      "problema": "Quem se candidata não sabe por que o currículo é descartado pelo ATS antes de chegar a uma pessoa, nem o que mudar para cada vaga.",
+      "solucao": "Uma nota ATS determinística de 0 a 100 (palavras-chave 30%, densidade de skills 20%, estrutura 15%, senioridade 15%, relevância da experiência 10%, formato 10%) explica o encaixe. LLMs no NVIDIA NIM cuidam só do texto: análise de lacunas, resumo reescrito, headline e carta. Planos Free, Pro e Elite com limite diário e cobrança pelo Stripe.",
+      "destaques": [
+        "Nota ATS calculada em Python, não por LLM: mesmo currículo e mesma vaga dão sempre o mesmo número",
+        "Camada de IA com 5 modelos especialistas e fallback em cascata ordenado por velocidade",
+        "Busca em Indeed, Catho, LinkedIn, Gupy, Remotar, GeekHunter, ProgramaThor, Nerdin e InfoJobs",
+        "Webhooks do Stripe como fonte da verdade do plano",
+        "8 routers FastAPI, migrations SQL e Edge Functions no Supabase"
+      ],
+      "decisoes": [
+        { "decisao": "Nota determinística, LLM só para texto", "motivo": "O usuário compara a nota entre edições. Uma nota que muda porque o modelo sorteou diferente não serviria para nada." },
+        { "decisao": "Vários modelos pequenos com fallback", "motivo": "Endpoints gratuitos têm limite e às vezes caem. Rotear por tarefa e cair para o próximo mantém o produto no ar." }
+      ],
+      "limitacoes": [
+        "As tasks Celery existem, mas as rotas ainda rodam a análise dentro da requisição",
+        "Sem suíte de testes automatizados (o QA foi manual)"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/jarvis-cv-saas",
+      "demo": null
     },
     {
-      "id": 6,
-      "titulo": "Design System Corporativo",
-      "descricao": "Prototipagem Figma de design system completo para uniformizar a estética dos sistemas internos da empresa.",
-      "tecnologias": ["Figma", "UI/UX", "Componentização"],
-      "link": "#"
+      "slug": "video-transcriber",
+      "titulo": "Video Transcriber",
+      "subtitulo": "Cole a URL de um vídeo público e baixe a transcrição em texto ou SRT",
+      "descricao": "O job passa por download, extração de áudio e transcrição com progresso na tela. API na Vercel, worker Python separado e o Postgres fazendo papel de fila.",
+      "tecnologias": ["Next.js", "TypeScript", "Supabase", "Python", "FFmpeg", "Whisper"],
+      "metricas": [
+        { "valor": "3/h", "label": "jobs por cliente (limite anti-abuso)" },
+        { "valor": "48", "label": "caracteres no token secreto de cada job" },
+        { "valor": "60 min", "label": "de vídeo por job (configurável)" }
+      ],
+      "notaMetricas": null,
+      "problema": "Transcrever vídeo leva minutos, e uma função serverless estoura o tempo muito antes disso. Ao mesmo tempo, o serviço é aberto, sem login, e precisa se proteger de abuso e manter cada resultado privado.",
+      "solucao": "O lado web só cria e lê jobs. Um processo Python pega o job mais antigo na fila (uma tabela do Postgres), baixa com yt-dlp, converte para MP3 mono de 64 kbps com FFmpeg, transcreve com Whisper e grava o texto com os segmentos. A página acompanha o status pela mesma linha.",
+      "destaques": [
+        "Acesso sem conta: cada job tem um token aleatório e só é lido com id + token",
+        "Limite de 3 jobs por hora por cliente, com o IP guardado apenas como hash SHA-256 com segredo",
+        "Controle de custo: áudio comprimido antes do upload e vídeos acima do limite recusados antes de chamar a API",
+        "SRT gerado no navegador a partir dos segmentos com tempo",
+        "A chave do Supabase fica só no servidor e no worker"
+      ],
+      "decisoes": [
+        { "decisao": "Separar API e worker", "motivo": "Download, FFmpeg e transcrição não cabem no timeout de uma função serverless." },
+        { "decisao": "Tabela do Postgres como fila", "motivo": "O estado do job precisa ser guardado de qualquer jeito; uma tabela serve de fila, status e histórico sem infraestrutura extra." }
+      ],
+      "limitacoes": [
+        "O worker pega o job com leitura seguida de update; com vários workers seria preciso um claim atômico (FOR UPDATE SKIP LOCKED)",
+        "Vídeos acima do limite são recusados em vez de divididos"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/video-transcriber",
+      "demo": "https://video-transcriber-gilt.vercel.app"
     },
     {
-      "id": 7,
-      "titulo": "Estoque Automatizado",
-      "descricao": "Script Python em servidor local para dar baixa automática em sistemas WMS utilizando leitura de planilhas.",
-      "tecnologias": ["Python", "Automação", "WMS"],
-      "link": "#"
-    },
-    {
-      "id": 8,
-      "titulo": "Portal de Fornecedores",
-      "descricao": "Aplicação front-end simples que integra autenticação e lista catálogos consumindo via Supabase.",
-      "tecnologias": ["React", "Supabase", "Auth"],
-      "link": "#"
-    },
-    {
-      "id": 9,
-      "titulo": "Sistema de CRM Avançado",
-      "descricao": "Plataforma completa de gestão de relacionamento com clientes com automação de marketing e analytics.",
-      "tecnologias": ["React", "Node.js", "MongoDB"],
-      "link": "#"
-    },
-    {
-      "id": 10,
-      "titulo": "App de Delivery Real-time",
-      "descricao": "Aplicativo mobile com rastreamento em tempo real, notificações push e sistema de pagamento integrado.",
-      "tecnologias": ["React Native", "Firebase", "Stripe"],
-      "link": "#"
-    },
-    {
-      "id": 11,
-      "titulo": "Plataforma E-learning",
-      "descricao": "Sistema de cursos online com vídeos sob demanda, quizzes interativos e certificados automáticos.",
-      "tecnologias": ["Vue.js", "Laravel", "AWS S3"],
-      "link": "#"
-    },
-    {
-      "id": 12,
-      "titulo": "Dashboard Financeiro",
-      "descricao": "Dashboard interativo para análise de investimentos com gráficos em tempo real e previsões.",
-      "tecnologias": ["D3.js", "Python", "FastAPI"],
-      "link": "#"
+      "slug": "powerbi-logistics-dax",
+      "titulo": "Dashboard de Logística em Power BI",
+      "subtitulo": "Faturamento, custo de frete, margem e inteligência de tempo em DAX, versionado em PBIP",
+      "descricao": "Painel executivo de logística por transportadora com mapa de fluxos entre estados. Salvo no formato PBIP, em texto, para que cada medida e visual apareça no diff do git.",
+      "tecnologias": ["Power BI", "DAX", "Power Query", "PBIP"],
+      "metricas": [
+        { "valor": "10", "label": "visuais no painel" },
+        { "valor": "200", "label": "embarques sintéticos de 2025" }
+      ],
+      "notaMetricas": null,
+      "problema": "Relatórios de Power BI costumam viver num .pbix binário: o git não mostra o que mudou e não dá para revisar uma medida como se revisa código.",
+      "solucao": "Painel com cards de faturamento, margem, ticket médio, volume, YTD e YoY, mapa de origem e destino e gráficos por transportadora e por mês. O modelo fica em TMDL e o relatório em JSON, então uma medida alterada vira uma linha no diff.",
+      "destaques": [
+        "Inteligência de tempo com TOTALYTD e SAMEPERIODLASTYEAR",
+        "DIVIDE com valor de reserva em todas as medidas: filtro vazio mostra 0, não erro",
+        "Mapa de fluxo entre estados no Azure Maps",
+        "Guia de construção passo a passo no repositório"
+      ],
+      "decisoes": [
+        { "decisao": "PBIP em vez de só .pbix", "motivo": "Texto versionável: a revisão do relatório passa a funcionar como revisão de código." }
+      ],
+      "limitacoes": [
+        "Uma tabela única mais as tabelas de data automáticas; o esquema estrela é o próximo passo",
+        "Os dados cobrem só 2025, então o YoY fica em 0 até entrar um segundo ano"
+      ],
+      "repo": "https://github.com/silvano-moraes-de-souza/powerbi-logistics-dax",
+      "demo": null
     }
   ]
 }

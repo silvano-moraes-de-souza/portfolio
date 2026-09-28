@@ -106,7 +106,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 border-l-2 border-white/20 pl-8 group cursor-pointer">
             <LineChart className="text-cyan-400 group-hover:text-cyan-300 transition-colors" size={38} />
             <div className={`font-mono text-sm font-bold leading-tight uppercase tracking-widest hidden sm:block transition-colors duration-300 ${isDark ? 'text-cyan-400' : 'text-white'}`}>
-              Análise de<br/>Dados
+              Engenharia de<br/>Software
             </div>
           </div>
         </div>
