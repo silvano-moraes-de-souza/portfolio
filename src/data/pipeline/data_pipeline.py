@@ -35,7 +35,7 @@ async def main():
     raw = await p.extract()
     df = p.transform(raw)
     await p.load(df)
-    print("✅ Pipeline OK")
+    print("Pipeline OK")
 
 if __name__ == "__main__":
     asyncio.run(main())
