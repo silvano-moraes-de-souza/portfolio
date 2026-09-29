@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-label="Portfolio: Personal site with projects mirrored from the GitHub READMEs">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1016"/><stop offset="1" stop-color="#111a24"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#58a6ff"/><stop offset="0.45" stop-color="#f5fbff"/>
+      <stop offset="0.55" stop-color="#f5fbff"/><stop offset="1" stop-color="#58a6ff"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-1 0; 1 0" dur="4.5s" repeatCount="indefinite"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.30"/><stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1b2430" stroke-width="1"/>
+    </pattern>
+    <style>
+      .sans { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; } .mono { font-family: ui-monospace, 'Cascadia Code', Consolas, 'Liberation Mono', monospace; }
+      .pulse { animation: pulse 3s ease-in-out infinite; transform-origin: 1040px 180px; }
+      @keyframes pulse { 0%, 100% { transform: scale(0.92); opacity: .65; } 50% { transform: scale(1.08); opacity: 1; } }
+      .fade { opacity: 0; animation: fade 8s infinite; }
+      @keyframes fade { 0% { opacity: 0; transform: translateY(8px); } 6% { opacity: 1; transform: none; } 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
+      .grow { transform-box: fill-box; transform-origin: bottom; animation: grow 8s ease-out infinite; }
+      @keyframes grow { 0% { transform: scaleY(0); } 18% { transform: scaleY(1); } 88% { transform: scaleY(1); opacity: 1; } 96%, 100% { transform: scaleY(1); opacity: 0; } }
+      .growx { transform-box: fill-box; transform-origin: left; animation: growx 8s ease-out infinite; }
+      @keyframes growx { 0% { transform: scaleX(0); } 18% { transform: scaleX(1); } 88% { transform: scaleX(1); opacity: 1; } 96%, 100% { transform: scaleX(1); opacity: 0; } }
+      .draw { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 8s ease-in-out infinite; }
+      @keyframes draw { 0% { stroke-dashoffset: 1000; } 35% { stroke-dashoffset: 0; } 88% { stroke-dashoffset: 0; opacity: 1; } 96%, 100% { opacity: 0; } }
+      .flow { stroke-dasharray: 6 8; animation: flow 1.4s linear infinite; }
+      @keyframes flow { to { stroke-dashoffset: -28; } }
+      .blink { animation: blink 1s steps(1) infinite; } @keyframes blink { 50% { opacity: 0; } }
+      .d1 { animation-delay: .3s; } .d2 { animation-delay: .6s; } .d3 { animation-delay: .9s; }
+      .d4 { animation-delay: 1.2s; } .d5 { animation-delay: 1.5s; } .d6 { animation-delay: 1.8s; }
+      .d7 { animation-delay: 2.1s; } .d8 { animation-delay: 2.4s; } .d9 { animation-delay: 2.7s; }
+    </style>
+  </defs>
+  <rect width="1280" height="360" fill="url(#bg)"/>
+  <rect width="1280" height="360" fill="url(#grid)" opacity="0.55"/>
+  <circle class="pulse" cx="1040" cy="180" r="175" fill="url(#glow)"/>
+  <rect x="64" y="64" width="6" height="232" rx="3" fill="#58a6ff"/>
+  <text x="96" y="96" class="mono" font-size="16" fill="#58a6ff" letter-spacing="2">SILVANOMSOUZA.VERCEL.APP</text>
+  <text x="92" y="167" class="sans" font-size="88" font-weight="800" fill="url(#shine)">Portfolio</text>
+  <text x="96" y="212" class="sans" font-size="20" fill="#9aa7b2">Personal site with projects mirrored from the GitHub READMEs</text>
+  <rect x="96" y="262" width="63" height="28" rx="14" fill="#161b22" stroke="#58a6ff" stroke-opacity="0.45"/><text x="128" y="281" text-anchor="middle" class="mono" font-size="13" fill="#c9d1d9">React</text><rect x="169" y="262" width="55" height="28" rx="14" fill="#161b22" stroke="#58a6ff" stroke-opacity="0.45"/><text x="196" y="281" text-anchor="middle" class="mono" font-size="13" fill="#c9d1d9">Vite</text><rect x="234" y="262" width="88" height="28" rx="14" fill="#161b22" stroke="#58a6ff" stroke-opacity="0.45"/><text x="278" y="281" text-anchor="middle" class="mono" font-size="13" fill="#c9d1d9">Tailwind</text><rect x="331" y="262" width="71" height="28" rx="14" fill="#161b22" stroke="#58a6ff" stroke-opacity="0.45"/><text x="367" y="281" text-anchor="middle" class="mono" font-size="13" fill="#c9d1d9">Vercel</text>
+  <g><rect x="850" y="40" width="380" height="280" rx="14" fill="#0f141b" stroke="#2a3542"/><rect x="850" y="40" width="380" height="30" rx="14" fill="#1b2029"/><circle cx="870" cy="55" r="5" fill="#ff5f56"/><circle cx="886" cy="55" r="5" fill="#ffbd2e"/><circle cx="902" cy="55" r="5" fill="#27c93f"/><rect x="930" y="47" width="200" height="16" rx="8" fill="#0f141b"/><text x="942" y="59" class="mono" font-size="10" fill="#8b949e">silvanomsouza.vercel.app</text><g class="fade d1"><rect x="870" y="86" width="96" height="116" rx="10" fill="#1b2029"/><circle cx="918" cy="130" r="26" fill="#58a6ff" fill-opacity=".35"/></g><g class="fade d2"><rect x="980" y="90" width="230" height="18" rx="6" fill="#58a6ff"/><rect x="980" y="118" width="200" height="8" rx="4" fill="#3b4655"/><rect x="980" y="134" width="215" height="8" rx="4" fill="#3b4655"/></g><g class="fade d3"><rect x="980" y="156" width="50" height="46" rx="8" fill="#1b2029"/><rect x="988" y="166" width="24" height="10" rx="3" fill="#58a6ff"/></g><g class="fade d4"><rect x="1038" y="156" width="50" height="46" rx="8" fill="#1b2029"/><rect x="1046" y="166" width="24" height="10" rx="3" fill="#3fb950"/></g><g class="fade d5"><rect x="1096" y="156" width="50" height="46" rx="8" fill="#1b2029"/><rect x="1104" y="166" width="24" height="10" rx="3" fill="#f78166"/></g><g class="fade d6"><rect x="1154" y="156" width="50" height="46" rx="8" fill="#1b2029"/><rect x="1162" y="166" width="24" height="10" rx="3" fill="#d29922"/></g><g class="fade d7"><rect x="870" y="218" width="108" height="86" rx="10" fill="#1b2029" stroke="#58a6ff" stroke-opacity=".35"/><rect x="880" y="228" width="88" height="30" rx="6" fill="#58a6ff" fill-opacity=".25"/></g><g class="fade d8"><rect x="988" y="218" width="108" height="86" rx="10" fill="#1b2029" stroke="#58a6ff" stroke-opacity=".35"/><rect x="998" y="228" width="88" height="30" rx="6" fill="#58a6ff" fill-opacity=".25"/></g><g class="fade d9"><rect x="1106" y="218" width="108" height="86" rx="10" fill="#1b2029" stroke="#58a6ff" stroke-opacity=".35"/><rect x="1116" y="228" width="88" height="30" rx="6" fill="#58a6ff" fill-opacity=".25"/></g></g>
+</svg>

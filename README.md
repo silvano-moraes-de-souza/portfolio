@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.svg" alt="Portfolio" width="100%">
+</p>
+
 # silvanomsouza.vercel.app
 
 <p>
