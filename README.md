@@ -9,6 +9,15 @@
 
 Personal portfolio of Silvano Moraes de Souza, Software Engineer (Python, APIs, automation and data in production). The site is in Portuguese.
 
+![Home page](docs/screenshot-home.png)
+
+<details>
+<summary>Projects page: every card mirrors a GitHub README</summary>
+
+![Projects page](docs/screenshot-projects.png)
+
+</details>
+
 | Page | Content |
 |---|---|
 | `/` | Profile, headline and stack, same text as the LinkedIn About section |
